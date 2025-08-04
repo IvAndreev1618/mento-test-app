@@ -13,7 +13,7 @@ class TestYCScraper:
     @pytest.fixture
     def config(self):
         config = Config()
-        config.MAX_YC_COMPANIES = 5
+        config.MAX_YC_COMPANIES = 1
         return config
     
     @pytest.fixture

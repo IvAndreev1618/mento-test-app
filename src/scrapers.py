@@ -162,6 +162,8 @@ class YCScraper(BaseScraper):
                 full_url = f"https://www.ycombinator.com{href}"
                 if full_url not in company_links:
                     company_links.append(full_url)
+                    if len(company_links) == self.config.MAX_YC_COMPANIES:
+                        break
         return company_links
     
 
