@@ -5,7 +5,9 @@ from datetime import datetime
 import time
 from typing import List
 from src.config import Config
-from src.scrapers import CompanyData, YCScraper, GoogleSearchLinkedInScraper
+from src.yc_scrapper import YCScraper
+from src.google_scrapper import GoogleSearchLinkedInScraper
+from src.models import CompanyData
 
 logging.basicConfig(
     level=logging.INFO,
