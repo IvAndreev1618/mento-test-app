@@ -99,7 +99,7 @@ class YCScraper(BaseScraper):
                 WebDriverWait(driver, 1).until(
                     EC.presence_of_element_located((By.CSS_SELECTOR, 'a[href*="/companies/"]'))
                 )
-                logger.info("Found links to company pages")
+                logger.debug("Found links to company pages")
             except:
                 logger.warning("No company links found")
 
@@ -111,7 +111,7 @@ class YCScraper(BaseScraper):
             except RequestLimitsExceeded as e:
                 logger.warning(f"YC scraping stopped due to request limits: {e}")
             
-            logger.info(f"YC scraper completed with {len(companies)} companies")
+            logger.debug(f"YC scraper completed with {len(companies)} companies")
             return companies
 
         except Exception as e:
@@ -184,7 +184,7 @@ class YCScraper(BaseScraper):
                 logger.warning(f"Request limits exceeded. Stopping with {len(companies)} companies collected ")
                 break
 
-        logger.info("Finished scraping individual company pages")
+        logger.debug("Finished scraping individual company pages")
         return companies
     
     def _scrape_single_company_with_retry(self, driver, company_url: str) -> CompanyData | None:
@@ -261,7 +261,7 @@ class YCScraper(BaseScraper):
             website = data.get('website', '').strip()
             description = data.get('one_liner', data.get('long_description', '')).strip()
             slug = data.get('slug', '')
-            yc_page_url = f"https://www.ycombinator.com/companies/{slug}" if slug else ""
+            yc_page_url = f"{self.config.YC_BASE_URL}/{slug}" if slug else ""
             
             return CompanyData(
                 name=name,
@@ -281,12 +281,10 @@ class GoogleSearchLinkedInScraper(BaseScraper):
     def scrape(self) -> List[CompanyData]:
         companies = []
 
-        logger.info(f"Scraping Google Search LinkedIn Scraper")
-        
         try:
             for term in self.config.LINKEDIN_SEARCH_TERMS:
                 try:
-                    logger.info(f"Searching Google for LinkedIn companies with: {term}")
+                    logger.debug(f"Searching Google for LinkedIn companies with: {term}")
                     term_companies = self._search_companies_with_google_api(term)
                     companies.extend(term_companies)
                     time.sleep(1)
