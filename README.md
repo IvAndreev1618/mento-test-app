@@ -28,14 +28,18 @@ The app extracts and displays exactly 6 fields:
 ## App Structure
 
 ```
-yc-s25-parser/
-├── app.py              # Main Streamlit application
-├── src/                # Source code package
-│   ├── __init__.py     # Package initialization
-│   ├── config.py       # Configuration settings
-│   └── scrapers.py     # YC and Google Search Linkedin scrapers
-├── test/               # Test package
-│   ├── __init__.py     # Test package initialization
+mento-test-app/
+├── app.py                  # Main Streamlit application
+├── src/                    # Source code package
+│   ├── __init__.py         # Package initialization
+│   ├── base_scraper.py     #
+│   ├── config.py           # Configuration settings
+│   ├── exceptions.py       # Custom exceptions
+│   ├── google_scrapper.py  # Google Search Linkedin scrapers
+│   ├── models.py           # Models 
+│   └── yc_scrapper.py      # YC scraper
+├── test/                   # Test package
+│   ├── __init__.py         # Test package initialization
 │   ├── test_yc_scraper.py      # YC scraper integration tests
 │   └── test_linkedin_scraper.py # Google Search Linkedin scraper integration tests
 ├── requirements.txt    # Python dependencies
