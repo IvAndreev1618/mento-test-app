@@ -1,8 +1,6 @@
-streamlit>=1.28.0
-beautifulsoup4>=4.12.0
-requests>=2.31.0
-pandas>=2.0.0
-lxml>=4.9.0
-html5lib>=1.1
-pytest>=7.4.0
-selenium>=4.15.0
+streamlit>=1.47.0
+beautifulsoup4>=4.13.4
+requests>=2.32.4
+pandas>=2.3.1
+pytest>=8.4.1
+selenium>=4.34.2

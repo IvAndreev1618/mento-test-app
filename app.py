@@ -42,9 +42,7 @@ class DataProcessor:
         merged = []
         
         linkedin_by_name = {self._normalize_company_name(c.name): c for c in linkedin_companies}
-        
-        logger.info(f"Merging data: {len(yc_companies)} YC companies, {len(linkedin_companies)} LinkedIn companies")
-        
+
         for yc_company in yc_companies:
             normalized_name = self._normalize_company_name(yc_company.name)
             
@@ -53,7 +51,7 @@ class DataProcessor:
             if linkedin_match and linkedin_match.linkedin_page_url:
                 yc_company.linkedin_page_url = linkedin_match.linkedin_page_url
                 yc_company.has_linkedin_yc_mention = linkedin_match.has_linkedin_yc_mention
-                logger.info(f"Merged LinkedIn URL for YC company: {yc_company.name}")
+                logger.debug(f"Merged LinkedIn URL for YC company: {yc_company.name}")
 
             merged.append(yc_company)
         
@@ -64,9 +62,8 @@ class DataProcessor:
             
             if normalized_name not in yc_names:
                 merged.append(linkedin_company)
-                logger.info(f"Added LinkedIn-only company: {linkedin_company.name}")
+                logger.debug(f"Added LinkedIn-only company: {linkedin_company.name}")
         
-        logger.info(f"Merge complete: {len(merged)} total companies")
         return merged
     
     def _normalize_company_name(self, name: str) -> str:
@@ -240,9 +237,9 @@ def main():
     st.sidebar.markdown("---")
     st.sidebar.markdown("### About")
     st.sidebar.markdown("""
-    This app scrapes YC S25 companies from:
+    This application gets YC S25 companies info from:
     - Y Combinator directory
-    - LinkedIn search results
+    - LinkedIn search results in Google API
     
     **Data Fields:**
     - YC Company Name

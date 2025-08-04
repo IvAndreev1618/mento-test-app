@@ -16,7 +16,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from streamlit import success
 
 logging.basicConfig(
     level=logging.INFO,
@@ -303,7 +302,6 @@ class GoogleSearchLinkedInScraper(BaseScraper):
                     seen_names.add(name_key)
                     deduplicated.append(company)
             
-            logger.info(f"LinkedIn scraper found {len(deduplicated)} unique companies")
             return deduplicated[:self.config.MAX_LINKEDIN_COMPANIES]
             
         except Exception as e:
@@ -340,7 +338,7 @@ class GoogleSearchLinkedInScraper(BaseScraper):
                     time.sleep(0.5)
                     
                 except Exception as e:
-                    logger.error(f"Error on Google API page {(start-1)//10 + 1}: {e}")
+                    logger.error(f"Error reading Google API search batch {(start-1)//10 + 1}: {e}")
                     continue
 
         except Exception as e:
